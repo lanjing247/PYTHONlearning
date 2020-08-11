@@ -24,4 +24,12 @@
     data['keyfrom']= 'fanyi.web'
     data['action']= 'FY_BY_REALTlME'
     ```
+    ## 访问并获取
+#  ```Python
+    data=urllib.parse.urlencode(data).encode('utf-8')
+    response=urllib.request.urlopen(url,data)
+    html=response.read().decode('utf-8')
+     
+    target=json.loads(html)
+    print('翻译结果:%s'%(target['translateResult'][0][0]['tgt']))```
 
