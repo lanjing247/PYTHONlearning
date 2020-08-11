@@ -1,38 +1,33 @@
-import os
 import urllib.request
 import urllib.parse
 import json
-import time
+
 while  True:
-    content=input('输入翻译内容（输入&&&退出程序）:')
-    if content=='&&&':
+    TranslationContent=input('输入翻译内容（输入&&&退出程序）:')
+    if TranslationContent=='&&&':
         break
 
-    url='http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule'
+    YouDaoFanYiUrl='http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule'
 
-    data={}
-    data['i']=content
-    data['from']='AUTO'
-    data['to']='AUTO'
-    data['smartresult']= 'dict'
-    data['client:']='fanyideskweb'
-    data['salt']='15965290351827'
-    data['sign']='d351408d47975ffb11bbbf82a4eec754'
-    data['ts']='1596529035182'
-    data['bv']='7b07590bbf1761eedb1ff6dbfac3c1f0'
-    data['doctype']= 'json'
-    data['version']= '2.1'
-    data['keyfrom']= 'fanyi.web'
-    data['action']= 'FY_BY_REALTlME'
+    FormData={}
+    FormData['i']=TranslationContent
+    FormData['from']='AUTO'
+    FormData['to']='AUTO'
+    FormData['smartresult']= 'dict'
+    FormData['client:']='fanyideskweb'
+    FormData['salt']='15965290351827'
+    FormData['sign']='d351408d47975ffb11bbbf82a4eec754'
+    FormData['ts']='1596529035182'
+    FormData['bv']='7b07590bbf1761eedb1ff6dbfac3c1f0'
+    FormData['doctype']= 'json'
+    FormData['version']= '2.1'
+    FormData['keyfrom']= 'fanyi.web'
+    FormData['action']= 'FY_BY_REALTlME'
 
-    data=urllib.parse.urlencode(data).encode('utf-8')
-    response=urllib.request.urlopen(url,data)
-    html=response.read().decode('utf-8')
+    ResponseFormData=urllib.parse.urlencode(FormData).encode('utf-8')
+    Response=urllib.request.urlopen(YouDaoFanYiUrl,ResponseFormData)
+    Html=Response.read().decode('utf-8')
      
-    target=json.loads(html)
-    print('翻译结果:%s'%(target['translateResult'][0][0]['tgt']))
+    Target=json.loads(Html)
+    print('翻译结果:%s'%(Target['translateResult'][0][0]['tgt']))
 
-    #time.sleep(1)
-
-    #os.system('pause')
-     
